@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM Manipulation</title>
+  </head>
+  <body>
+    <div class="container"></div>
+
+    <script>
+      // Select the container element
+      const container = document.querySelector("div.container");
+
+      // Create a new paragraph element
+      const para = document.createElement("p");
+
+      // Add text inside the new paragraph element
+      para.innerText = "Hello World";
+
+      // Add the paragraph to the container element
+      container.append(para);
+
+      // Add a class to the paragraph element
+      para.classList.add("para1");
+
+      // Add a title attribute to the paragraph element
+      para.setAttribute("title", "This is a paragraph");
+
+      // Remove the title attribute from the paragraph element
+      para.removeAttribute("title");
+
+      // Remove the paragraph element from the DOM
+      para.remove();
+
+      // Example of appending multiple elements
+      const span = document.createElement("span");
+      span.innerText = "This is a span";
+
+      const newPara = document.createElement("p");
+      newPara.innerText = "This is a p tag";
+
+      container.append(newPara, span);
+
+      // Example of modifying HTML content directly
+      container.innerHTML = "<em>I am a fancy italic div</em>";
+
+      // Example of setting and getting text content
+      const text = (newPara.textContent = "This is a new paragraph");
+      console.log(text); // Output: This is a new paragraph
+    </script>
+  </body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Age Calculator</title>
+  </head>
+  <body>
+    <input type="date" id="date" />
+    <button type="button" onclick="ageFinder()" id="saver">Submit</button>
+    <p id="alert-box" style="visibility: hidden"></p>
+
+    <script>
+      function ageFinder() {
+        // Get the value from the date input field
+        let birthdayInput = document.getElementById("date").value;
+
+        // If no date is provided, show an error and return
+        if (!birthdayInput) {
+          document.querySelector("#alert-box").style.visibility = "visible";
+          document.querySelector("#alert-box").textContent =
+            "Please select a date";
+          document.querySelector("#alert-box").style.color = "red";
+          return;
+        }
+
+        // Extract year, month, and day from the input date
+        let birthYear = Number(birthdayInput.substr(0, 4));
+        let birthMonth = Number(birthdayInput.substr(5, 2));
+        let birthDate = Number(birthdayInput.substr(8, 2));
+
+        // Create a Date object for the birthday
+        let birthday = new Date(birthYear, birthMonth - 1, birthDate);
+        const today = new Date();
+
+        // Check if the birthday is in the future
+        if (birthday > today) {
+          document.querySelector("#alert-box").style.visibility = "visible";
+          document.querySelector("#alert-box").textContent = "Invalid Date";
+          document.querySelector("#alert-box").style.color = "red";
+          return;
+        }
+
+        // Calculate age components
+        let yearDiff = today.getFullYear() - birthday.getFullYear();
+        let monthDiff = today.getMonth() - birthday.getMonth();
+        let dayDiff = today.getDate() - birthday.getDate();
+
+        // Adjust for negative day difference
+        if (dayDiff < 0) {
+          monthDiff--;
+          const daysInPreviousMonth = new Date(
+            today.getFullYear(),
+            today.getMonth(),
+            0
+          ).getDate();
+          dayDiff += daysInPreviousMonth;
+        }
+
+        // Adjust for negative month difference
+        if (monthDiff < 0) {
+          yearDiff--;
+          monthDiff += 12;
+        }
+
+        // Display the result
+        document.querySelector("#alert-box").style.visibility = "visible";
+        document.querySelector(
+          "#alert-box"
+        ).textContent = `You are ${yearDiff} years, ${monthDiff} months, and ${dayDiff} days old`;
+        document.querySelector("#alert-box").style.color = "black"; // Reset color to black
+      }
+    </script>
+  </body>
+</html>

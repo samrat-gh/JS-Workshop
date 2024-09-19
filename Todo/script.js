@@ -17,13 +17,16 @@ function getTasksFromLocalStorage() {
 function inputFieldfn() {
   const entryField = document.getElementById("entry-field");
   const task = entryField.value.trim();
+  console.log("value :", task);
 
   if (task) {
     // Get tasks from localStorage
     const tasks = getTasksFromLocalStorage();
+    console.log("getTasksFromLocalStorage: ", tasks);
 
     // Add the new task
     tasks.push(task);
+    console.log("new tasks: ", tasks);
 
     // Save updated tasks to localStorage
     saveTasksToLocalStorage(tasks);
@@ -58,6 +61,7 @@ function renderTasks() {
   const tasks = getTasksFromLocalStorage();
 
   // Loop through tasks and display each one
+  // ["hello", "hi", "welcome"]
   tasks.forEach((task, index) => {
     const li = document.createElement("li");
     li.innerHTML = `
